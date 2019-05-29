@@ -16,4 +16,14 @@ export class ConditionsService {
     this.loadingCounter.next(this.loadingCounter.value - 1);
   }
 
+  constructor() {
+    this.loadingCounter.subscribe((loadingCounter) => {
+      if (!!loadingCounter) {
+        window.document.body.classList.add('data-loading-inprogress');
+      } else {
+        window.document.body.classList.remove('data-loading-inprogress');
+      }
+    });
+  }
+
 }

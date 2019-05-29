@@ -7,8 +7,21 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style type="text/css">
+    body.data-loading-inprogress * {
+      cursor: progress !important;
+    }
+  </style>
 </head>
-<body>
-  <books-root></books-root>
+<body class="data-loading-inprogress">
+  <books-root>
+    <div style="position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);">
+      <img src="assets/loader.gif">
+    </div>
+  </books-root>
 </body>
 </html>
