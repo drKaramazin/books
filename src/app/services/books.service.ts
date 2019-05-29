@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BackendService } from './backend.service';
+import { Book } from '../models/book';
 
 @Injectable()
 export class BooksService {
@@ -9,7 +10,7 @@ export class BooksService {
     private backend: BackendService,
   ) {}
 
-  getAll(): Promise<any> {
+  getAll(): Promise<Book[]> {
     return this.backend.get('Books');
   }
 

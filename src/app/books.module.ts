@@ -1,9 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentModule } from 'ngx-moment';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BooksComponent } from './books.component';
+import { ListComponent } from './sections/list/list.component';
+import { DescriptionComponent } from './sections/description/description.component';
+
+import { ChooseCoverPipe } from './pipes/choose-cover.pipe';
+import { FindAuthorsPipe } from './pipes/find-authors.pipe';
+import { AuthorPipe } from './pipes/author.pipe';
 
 import { ConfigService } from './services/config.service';
 import { BackendService } from './services/backend.service';
@@ -16,11 +24,19 @@ import { booksInitializer } from './books.initializer';
 @NgModule({
   declarations: [
     BooksComponent,
+    ListComponent,
+    DescriptionComponent,
+
+    ChooseCoverPipe,
+    FindAuthorsPipe,
+    AuthorPipe,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
+    NgbModule,
     BooksRoutingModule,
+    MomentModule,
   ],
   providers: [
     {

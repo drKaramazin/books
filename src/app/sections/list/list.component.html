@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-6 col-sm-3 book" *ngFor="let book of books; let i = index">
+        <div>
+            <img class="cover" src="/assets/images/covers/{{ i + 1 | chooseCover }}">
+        </div>
+
+        <div class="bottom">
+            <div class="title">{{ book.Title }}</div>
+            <div class="describe">{{ book.Description }}</div>
+            <div class="date">{{ book.PublishDate | amDateFormat:'LL' }}</div>
+
+            <div *ngIf="!hiddenAuthor && authors">
+                <div *ngFor="let author of (book.ID | findAuthors : authors)" class="author">
+                    {{ author | author }}
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="authorBehavior()">Автор</button>
+        </div>
+    </div>
+</div>
