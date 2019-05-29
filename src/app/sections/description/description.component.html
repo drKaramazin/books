@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<a routerLink="/">< Назад</a>
 
-</body>
-</html>
+<div class="row">
+    <div class="col-md-6">
+        <img class="book-cover" src="/assets/images/covers/{{ currentBook?.ID | chooseCover }}">
+    </div>
+    <div class="col-md-6">
+        <div class="book-title">{{ currentBook?.Title }}</div>
+        <div class="book-describe">{{ currentBook?.Description }}</div>
+        <div class="book-excerpt">{{ currentBook?.Excerpt }}</div>
+        <div class="book-page-count">Page count: {{ currentBook?.PageCount }}</div>
+        <div class="book-date">{{ currentBook?.PublishDate | amDateFormat:'LL' }}</div>
+    </div>
+</div>

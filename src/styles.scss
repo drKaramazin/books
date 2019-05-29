@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+.book-cover {
+  max-width: 100%;
+}
+
+.book-title {
+  font-weight: bold;
+}
+
+.book-describe {
+  font-size: 0.9em;
+}
+
+.book-date {
+  font-size: 0.8em;
+  color: darkgray;
+}
+
+.book-excerpt {
+  font-style: italic;
+  margin: 0.5em 0;
+}
+
+.book-excerpt::before {
+  content: '"';
+}
+
+.book-excerpt::after {
+  content: '"';
+}
+
+.book-page-count {
+  font-style: oblique;
+  font-size: 0.9em;
+  color: darkgray;
+}
