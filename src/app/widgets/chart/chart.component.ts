@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as moment from 'moment';
 
 import { Book } from '../../models/book';
 import { MONTHS } from '../../models/months';
+import { ChartType } from '../../models/chart-type';
 
 @Component({
   selector: 'books-chart',
@@ -27,7 +28,7 @@ export class ChartComponent {
     }
   };
   public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar';
+  public barChartType = 'bar';
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
@@ -37,39 +38,49 @@ export class ChartComponent {
   private pBooks: Book[];
   @Input() set books(books: Book[]) {
     this.pBooks = books;
-    if (this.pBooks) {
-      this.aggregate();
-    }
+    this.aggregate();
   }
   get books(): Book[] {
     return this.pBooks;
   }
 
+  private pType: ChartType;
+  @Input() set type(type: ChartType) {
+    this.pType = type;
+    this.aggregate();
+  }
+  get type(): ChartType {
+    return this.pType;
+  }
+
   aggregate() {
-    const aggregatedData = this.books.reduce((aggregate, book): { [month: string]: number[] } => {
-      const month = moment(book.PublishDate).month();
+    if (this.books && this.type !== undefined) {
+      const aggregatedData = this.books.reduce((aggregate, book): { [aggregator: string]: number[] } => {
 
-      if (aggregate[month]) {
-        aggregate[month].push(book.PageCount);
-      } else {
-        aggregate[month] = [book.PageCount];
-      }
+        const aggregator = this.type === ChartType.MONTHS
+          ? moment(book.PublishDate).month() : moment(book.PublishDate).year();
 
-      return aggregate;
-    }, {});
+        if (aggregate[aggregator]) {
+          aggregate[aggregator].push(book.PageCount);
+        } else {
+          aggregate[aggregator] = [book.PageCount];
+        }
 
-    const result = {};
-    Object.keys(aggregatedData).forEach((month) =>
-      result[month] = Math.round(aggregatedData[month].reduce((sum, count) => sum + count, 0) / aggregatedData[month].length)
-    );
+        return aggregate;
+      }, {});
 
-    this.barChartLabels = Object.keys(aggregatedData).map((num) => MONTHS[num]);
+      const result = {};
+      Object.keys(aggregatedData).forEach((aggregator) =>
+        result[aggregator]
+          = Math.round(aggregatedData[aggregator].reduce((sum, count) => sum + count, 0) / aggregatedData[aggregator].length)
+      );
 
-    this.barChartData[0].data = [];
-    Object.keys(aggregatedData).forEach((month) => this.barChartData[0].data.push(result[month]));
+      this.barChartLabels = this.type === ChartType.MONTHS
+        ? Object.keys(aggregatedData).map((num) => MONTHS[num]) : Object.keys(aggregatedData);
 
-    console.log(this.barChartData[0].data);
-    console.log(this.barChartLabels);
+      this.barChartData[0].data = [];
+      Object.keys(aggregatedData).forEach((aggregator) => this.barChartData[0].data.push(result[aggregator]));
+    }
   }
 
 }

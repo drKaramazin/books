@@ -1,4 +1,4 @@
 export enum ChartType {
-  MONTHS,
-  YEARS,
+  MONTHS = 'months',
+  YEARS = 'years',
 }
