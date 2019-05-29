@@ -4,6 +4,8 @@ import { BooksService } from '../../services/books.service';
 import { Book } from '../../models/book';
 import { Author } from '../../models/author';
 import { AuthorsService } from '../../services/authors.service';
+import { ChartType } from '../../models/chart-type';
+import { LABEL_FROM_CHART_TYPE } from '../../models/label-by-chart-type';
 
 @Component({
   selector: 'books-list',
@@ -12,10 +14,15 @@ import { AuthorsService } from '../../services/authors.service';
 })
 export class ListComponent implements OnInit {
 
+  LABEL_FROM_CHART_TYPE = LABEL_FROM_CHART_TYPE;
+  ChartType = ChartType;
+
   hiddenAuthor = true;
 
   books: Book[];
   authors: Author[];
+
+  chartType: ChartType = ChartType.MONTHS;
 
   constructor(
     private booksService: BooksService,

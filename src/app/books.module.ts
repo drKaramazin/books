@@ -3,11 +3,15 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentModule } from 'ngx-moment';
+import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BooksComponent } from './books.component';
 import { ListComponent } from './sections/list/list.component';
 import { DescriptionComponent } from './sections/description/description.component';
+
+import { ChartComponent } from './widgets/chart/chart.component';
 
 import { ChooseCoverPipe } from './pipes/choose-cover.pipe';
 import { FindAuthorsPipe } from './pipes/find-authors.pipe';
@@ -27,6 +31,8 @@ import { booksInitializer } from './books.initializer';
     ListComponent,
     DescriptionComponent,
 
+    ChartComponent,
+
     ChooseCoverPipe,
     FindAuthorsPipe,
     AuthorPipe,
@@ -37,6 +43,8 @@ import { booksInitializer } from './books.initializer';
     NgbModule,
     BooksRoutingModule,
     MomentModule,
+    ChartsModule,
+    FormsModule,
   ],
   providers: [
     {

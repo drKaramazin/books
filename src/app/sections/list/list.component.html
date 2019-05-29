@@ -1,3 +1,14 @@
+<div class="chart">
+    <books-chart [books]="books"></books-chart>
+</div>
+
+<div class="chart-tool">
+    <select class="form-control" [(ngModel)]="chartType">
+        <option [value]="ChartType.MONTHS">{{ LABEL_FROM_CHART_TYPE[ChartType.MONTHS] }}</option>
+        <option [value]="ChartType.YEARS">{{ LABEL_FROM_CHART_TYPE[ChartType.YEARS] }}</option>
+    </select>
+</div>
+
 <div class="row">
     <div class="col-6 col-sm-3 book" *ngFor="let book of books; let i = index">
         <div>
